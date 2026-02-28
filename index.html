@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تعلم الطباعة العمياء | Touch Typing App</title>
+    <meta name="description"
+        content="تطبيق احترافي لتعليم الطباعة العمياء باللغتين العربية والإنجليزية مع مستويات متدرجة واختبارات سرعة">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="glass-container">
+        <!-- Header -->
+        <header>
+            <div class="logo">
+                <i class="fa-solid fa-keyboard"></i>
+                <span id="app-title">الطباعة العمياء</span>
+            </div>
+            <div class="controls">
+                <button id="lang-btn" class="icon-btn">
+                    <i class="fa-solid fa-language"></i> <span id="lang-text">English</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main>
+            <!-- Welcome Screen -->
+            <section id="welcome-screen" class="screen active">
+                <h1 id="welcome-title">مرحباً بك في تطبيق الطباعة العمياء</h1>
+                <p id="welcome-desc">احترف الكتابة السريعة على لوحة المفاتيح عبر مستويات متدرجة تدعم اللغتين العربية
+                    والإنجليزية.</p>
+
+                <div class="level-selection">
+                    <h3 id="select-level-title">مستواك الحالي: <span id="current-user-level">1</span></h3>
+                </div>
+
+                <div class="mode-selection">
+                    <button id="train-btn" class="mode-btn train-mode-btn">
+                        <i class="fa-solid fa-graduation-cap"></i>
+                        <span id="train-text">تدريب</span>
+                        <small id="train-desc">تدرّب بدون وقت محدد</small>
+                    </button>
+                    <button id="test-btn" class="mode-btn test-mode-btn">
+                        <i class="fa-solid fa-stopwatch"></i>
+                        <span id="test-text">اختبار</span>
+                        <small id="test-desc">اختبر سرعتك بوقت محدد</small>
+                    </button>
+                </div>
+
+                <!-- Test Duration Selection (hidden by default) -->
+                <div id="test-duration-panel" class="test-duration-panel hidden">
+                    <h4 id="duration-title">اختر مدة الاختبار:</h4>
+                    <div class="duration-options">
+                        <button class="duration-btn" data-duration="60">
+                            <span>1</span> <small id="min-lbl-1">دقيقة</small>
+                        </button>
+                        <button class="duration-btn active-duration" data-duration="180">
+                            <span>3</span> <small id="min-lbl-3">دقائق</small>
+                        </button>
+                        <button class="duration-btn" data-duration="300">
+                            <span>5</span> <small id="min-lbl-5">دقائق</small>
+                        </button>
+                    </div>
+                    <button id="start-test-btn" class="primary-btn">
+                        <i class="fa-solid fa-play"></i> <span id="start-test-text">ابدأ الاختبار</span>
+                    </button>
+                </div>
+
+                <!-- Level Navigation -->
+                <div class="level-nav" id="level-nav">
+                    <button id="prev-level-btn" class="nav-btn">
+                        <i class="fa-solid fa-chevron-right"></i>
+                    </button>
+                    <div class="level-pills" id="level-pills"></div>
+                    <button id="next-level-nav-btn" class="nav-btn">
+                        <i class="fa-solid fa-chevron-left"></i>
+                    </button>
+                </div>
+            </section>
+
+            <!-- Typing Screen -->
+            <section id="typing-screen" class="screen hidden">
+                <div class="stats-bar">
+                    <div class="stat-box">
+                        <i class="fa-solid fa-bolt"></i>
+                        <div>
+                            <span class="stat-label" id="wpm-label">السرعة (WPM)</span>
+                            <span class="stat-value" id="wpm">0</span>
+                        </div>
+                    </div>
+                    <div class="stat-box">
+                        <i class="fa-solid fa-bullseye"></i>
+                        <div>
+                            <span class="stat-label" id="acc-label">الدقة</span>
+                            <span class="stat-value" id="accuracy">100%</span>
+                        </div>
+                    </div>
+                    <div class="stat-box" id="level-box">
+                        <i class="fa-solid fa-layer-group"></i>
+                        <div>
+                            <span class="stat-label" id="level-label">المستوى</span>
+                            <span class="stat-value" id="level-display">1</span>
+                        </div>
+                    </div>
+                    <div class="stat-box timer-box hidden" id="timer-box">
+                        <i class="fa-solid fa-hourglass-half"></i>
+                        <div>
+                            <span class="stat-label" id="timer-label">الوقت المتبقي</span>
+                            <span class="stat-value timer-value" id="timer-display">3:00</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mode badge -->
+                <div class="mode-badge" id="mode-badge">
+                    <i class="fa-solid fa-graduation-cap"></i> <span id="mode-badge-text">وضع التدريب</span>
+                </div>
+
+                <div class="typing-area">
+                    <div id="text-display" class="glass-panel text-display"></div>
+                    <input type="text" id="hidden-input" class="hidden-input" autocomplete="off" autocorrect="off"
+                        autocapitalize="off" spellcheck="false" autofocus>
+                </div>
+
+                <div class="hints" id="hint-text">
+                    ركز على الشاشة ولا تنظر إلى لوحة المفاتيح!
+                </div>
+            </section>
+
+            <!-- Result Screen -->
+            <section id="result-screen" class="screen hidden">
+                <h2 id="result-title">النتيجة</h2>
+                <div class="result-stats">
+                    <div class="result-circle wpm-circle">
+                        <svg viewBox="0 0 36 36" class="circular-chart">
+                            <path class="circle-bg"
+                                d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                            <path class="circle" id="wpm-circle-path" stroke-dasharray="0, 100"
+                                d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                        </svg>
+                        <div class="result-val">
+                            <span id="final-wpm">0</span>
+                            <small id="final-wpm-lbl">WPM</small>
+                        </div>
+                    </div>
+
+                    <div class="result-circle acc-circle">
+                        <svg viewBox="0 0 36 36" class="circular-chart">
+                            <path class="circle-bg"
+                                d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                            <path class="circle" id="acc-circle-path" stroke-dasharray="0, 100"
+                                d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                        </svg>
+                        <div class="result-val">
+                            <span id="final-acc">0%</span>
+                            <small id="final-acc-lbl">الدقة</small>
+                        </div>
+                    </div>
+                </div>
+
+                <p id="result-message" class="result-message">أداء ممتاز! يمكنك الانتقال للمستوى التالي.</p>
+
+                <div class="result-actions">
+                    <button id="retry-btn" class="secondary-btn">
+                        <i class="fa-solid fa-rotate-right"></i> <span id="retry-text">إعادة المحاولة</span>
+                    </button>
+                    <button id="next-level-btn" class="primary-btn hidden">
+                        <span id="next-text">المستوى التالي</span> <i class="fa-solid fa-arrow-left" id="next-icon"></i>
+                    </button>
+                    <button id="home-btn" class="secondary-btn">
+                        <i class="fa-solid fa-house"></i> <span id="home-text">الرئيسية</span>
+                    </button>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer>
+            <p id="footer-text">تمت البرمجة باحترافية لتطوير مهاراتك</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
