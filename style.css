@@ -10,6 +10,7 @@
     --error: #ef4444;
     --warning: #f59e0b;
     --font-ar: Arial, sans-serif;
+    --font-ar: Arial, sans-serif;
     --font-en: 'Inter', sans-serif;
     --shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
 }
@@ -407,9 +408,12 @@ p#welcome-desc {
     text-align: right;
     direction: rtl;
     min-height: 200px;
-    max-height: 320px;
+    overflow-x: hidden;
     overflow-y: auto;
     user-select: none;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    white-space: normal;
 }
 
 [dir="ltr"] .text-display {

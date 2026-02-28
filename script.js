@@ -318,17 +318,12 @@ function renderLevelPills() {
             pill.classList.add('current-pill');
         } else if (i < currentLevel) {
             pill.classList.add('completed-pill');
-        } else {
-            pill.classList.add('locked-pill');
         }
 
-        // Allow clicking completed or current levels
-        if (i <= currentLevel) {
-            pill.addEventListener('click', () => {
-                currentLevel = i;
-                updateUI();
-            });
-        }
+        pill.addEventListener('click', () => {
+            currentLevel = i;
+            updateUI();
+        });
 
         d.levelPills.appendChild(pill);
     }
